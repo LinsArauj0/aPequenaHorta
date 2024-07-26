@@ -1,0 +1,141 @@
+/* carousel.css */
+
+/* Animação de subida e descida */
+@keyframes slide-up-down {
+    0% {
+      transform: translateY(100%);
+    }
+    50% {
+      transform: translateY(-10%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .slick-active img {
+    animation: slide-up-down 0.5s ease-in-out;
+  }
+  
+  /* Estilizar o container do carrossel */
+  .carousel-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  /* Estilizar as imagens */
+  .slick-slide img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Estilizar os botões de navegação */
+  .slick-prev,
+  .slick-next {
+    width: 40px;
+    height: 40px;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .slick-prev:hover,
+  .slick-next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 20px;
+    color: white;
+  }
+  
+  /* Centralizar os botões de navegação verticalmente */
+  .slick-prev {
+    left: 10px;
+  }
+  
+  .slick-next {
+    right: 10px;
+  }
+  
+  /* Estilizar os pontos indicativos (dots) */
+  .slick-dots {
+    bottom: 15px;
+  }
+  
+  .slick-dots li {
+    margin: 0 5px;
+  }
+  
+  .slick-dots li button:before {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.3s ease;
+  }
+  
+  .slick-dots li.slick-active button:before {
+    color: white;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .carousel-container {
+      max-width: 100%;
+      padding: 0 30px;
+    }
+  
+    .slick-prev,
+    .slick-next {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .slick-prev:before,
+    .slick-next:before {
+      font-size: 16px;
+    }
+  
+    .slick-dots {
+      bottom: 10px;
+    }
+  
+    .slick-dots li button:before {
+      font-size: 10px;
+    }
+  
+    .slick-dots li {
+      margin: 0 3px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .slick-prev,
+    .slick-next {
+      width: 25px;
+      height: 25px;
+    }
+  
+    .slick-prev:before,
+    .slick-next:before {
+      font-size: 14px;
+    }
+  
+    .slick-dots {
+      bottom: 5px;
+    }
+  
+    .slick-dots li button:before {
+      font-size: 8px;
+    }
+  
+    .slick-dots li {
+      margin: 0 2px;
+    }
+  }
+  

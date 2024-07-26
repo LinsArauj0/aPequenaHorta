@@ -1,0 +1,80 @@
+.about-us-page-container {
+    width: 90%;
+    max-width: 1200px;
+    background-color: #a3b18a;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .about-us-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .about-us-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .about-introduction,
+  .about-history,
+  .about-team,
+  .about-values {
+    margin-bottom: 40px;
+  }
+  
+  .about-introduction h2,
+  .about-history h2,
+  .about-team h2,
+  .about-values h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .about-introduction p,
+  .about-history p,
+  .about-team p,
+  .about-values p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .about-team {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .team-member {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .team-member img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .team-member-info {
+    max-width: 600px;
+  }
+  
+  .team-member-info h3 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  
+  .team-member-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .team-member {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  

@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* app.css */
+
+.app {
+    align-items: center;
+    background: #a3b18a;
+}
