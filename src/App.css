@@ -9,3 +9,9 @@
     align-items: center;
     background: #a3b18a;
 }
+
+html {
+    scrollbar-width: thin;
+    scroll-behavior: auto;
+    
+}

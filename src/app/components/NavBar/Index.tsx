@@ -1,45 +1,64 @@
-// src/components/NavBar.js
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
-import "./Navbar.css";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useCartStore } from '../Store/CartStore';
+import CartModal from '../Carrinho/CartModal';
+import styles from './NavBar.module.css';
 
-export const NavBar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+export const NavBar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const cart = useCartStore((state) => state.cart);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-    return (
-        <nav className="navbar">
-            <div className="navbar-logo">
-                <img src="path/to/logo.png" alt="Logo" /> {/* Substitua pelo caminho do seu logo */}
-            </div>
-            <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-                <ul>
-                    <li>
-                        <Link to="/" className="nav-link">Inicio</Link>
-                    </li>
-                    <li>
-                        <Link to="/about" className="nav-link">Sobre</Link>
-                    </li>
-                    <li>
-                        <Link to="/product" className="nav-link">Produtos</Link>
-                    </li>
-                    <li>
-                        <Link to="/contact" className="nav-link">Contato</Link>
-                    </li>
-                </ul>
-            </div>
-            <div className="navbar-cart">
-               <Link to="/cart" className="navbar-links-cart" ><FaShoppingCart size={22} color="#fff"/></Link> 
-            </div>
-            <div className="menu-icon" onClick={toggleMenu}>
-                <div className={`menu-line ${isOpen ? 'open' : ''}`}></div>
-                <div className={`menu-line ${isOpen ? 'open' : ''}`}></div>
-                <div className={`menu-line ${isOpen ? 'open' : ''}`}></div>
-            </div>
-        </nav>
-    );
+  const handleCartClick = () => {
+    setIsCartOpen(true);
+  };
+
+  const handleCloseCart = () => {
+    setIsCartOpen(false);
+  };
+
+  const itemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  return (
+    <>
+      <nav className={styles.navbar}>
+        <div className={styles['navbar-logo']}>
+          <img src="path/to/logo.png" alt="Logo" />
+        </div>
+        <div className={`${styles['navbar-links']} ${isOpen ? styles.active : ''}`}>
+          <ul>
+            <li>
+              <Link to="/" className={styles['nav-link']}>Inicio</Link>
+            </li>
+            <li>
+              <Link to="/about" className={styles['nav-link']}>Sobre</Link>
+            </li>
+            <li>
+              <Link to="/product" className={styles['nav-link']}>Produtos</Link>
+            </li>
+            <li>
+              <Link to="/contact" className={styles['nav-link']}>Contato</Link>
+            </li>
+          </ul>
+        </div>
+        <div className={styles['navbar-cart']} onClick={handleCartClick}>
+          <FaShoppingCart className={styles['cart-icon']} />
+          {itemCount > 0 && (
+            <div className={styles['cart-count']}>{itemCount}</div>
+          )}
+        </div>
+        <div className={styles['menu-icon']} onClick={toggleMenu}>
+          <div className={`${styles['menu-line']} ${isOpen ? styles.open : ''}`}></div>
+          <div className={`${styles['menu-line']} ${isOpen ? styles.open : ''}`}></div>
+          <div className={`${styles['menu-line']} ${isOpen ? styles.open : ''}`}></div>
+        </div>
+      </nav>
+      {isCartOpen && <CartModal isOpen={isCartOpen} onClose={handleCloseCart} />}
+    </>
+  );
 };

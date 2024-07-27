@@ -1,0 +1,83 @@
+/* CartPage.module.css */
+
+.cartPageContainer {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.emptyMessage {
+  font-size: 1.25rem;
+  color: #888;
+}
+
+.cartContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItems {
+  margin-bottom: 20px;
+}
+
+.cartSummary {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.couponSection {
+  margin-top: 20px;
+}
+
+.couponSection input {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: calc(100% - 120px);
+  margin-right: 10px;
+}
+
+.couponSection button {
+  background: #007bff;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.checkoutButton {
+  background: #28a745;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .cartPageContainer {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .couponSection input {
+    width: calc(100% - 100px);
+  }
+
+  .checkoutButton {
+    padding: 10px;
+    font-size: 0.875rem;
+  }
+}

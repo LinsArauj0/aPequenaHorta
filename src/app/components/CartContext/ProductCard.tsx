@@ -1,33 +1,57 @@
 import React from 'react';
-import { useCart } from '../../components/CartContext/CartContext';
-import './productCard.css';
+import { useCartStore } from '../Store/CartStore';
+import productCardStyles from './Product.module.css';
 
-interface Product {
-  image: string;
-  title: string;
-  description: string;
-  price: number;
-}
+type Props = {
+  product: {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+    description: string;
+  };
+};
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
-  const { addToCart } = useCart();
+const ProductCard: React.FC<Props> = ({ product }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const [quantity, setQuantity] = React.useState<number>(1);
 
   const handleAddToCart = () => {
-    addToCart(product);
-    window.location.href = '/cart'; // Redireciona para a página do carrinho
+    addToCart({ ...product, quantity });
   };
 
   return (
-    <div className="product-card">
-      <img src={product.image} alt={product.title} />
-      <div className="product-info">
-        <h3>{product.title}</h3>
-        <p>{product.description}</p>
-        <p className="product-price">R$ {product.price.toFixed(2)}</p>
+    <div className={productCardStyles.card}>
+      <img src={product.image} alt={product.name} className={productCardStyles.image} />
+      <div className={productCardStyles.details}>
+        <h3 className={productCardStyles.name}>{product.name}</h3>
+        <p className={productCardStyles.description}>{product.description}</p>
+        <p className={productCardStyles.price}>R$ {product.price.toFixed(2)}</p>
+        <div className={productCardStyles.quantityWrapper}>
+          <button
+            className={productCardStyles.quantityButton}
+            onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={quantity}
+            min="1"
+            className={productCardStyles.quantityInput}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+          />
+          <button
+            className={productCardStyles.quantityButton}
+            onClick={() => setQuantity(quantity + 1)}
+          >
+            +
+          </button>
+        </div>
+        <button className={productCardStyles.addButton} onClick={handleAddToCart}>
+          Adicionar ao carrinho
+        </button>
       </div>
-      <button className="add-to-cart" onClick={handleAddToCart}>
-        Adicionar ao Carrinho
-      </button>
     </div>
   );
 };

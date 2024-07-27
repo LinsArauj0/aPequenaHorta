@@ -1,0 +1,33 @@
+.carouselButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10; /* Garante que os botões fiquem sobre o carrossel */
+  font-size: 1.5rem; /* Tamanho da fonte para os botões */
+}
+
+.carouselButtonLeft {
+  left: 10px;
+}
+
+.carouselButtonRight {
+  right: 10px;
+}
+
+.carouselButton:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Escurece o botão ao passar o mouse */
+}
+
+.carouselWrapper {
+  display: flex;
+  align-items: center; /* Centraliza os itens verticalmente */
+  overflow-x: visible; /* Oculta o conteúdo que ultrapassa o contêiner */
+  white-space: nowrap; /* Garante que os itens não quebrem a linha */
+  transition: transform 0.3s ease-in-out; /* Animação suave ao rolar */
+}

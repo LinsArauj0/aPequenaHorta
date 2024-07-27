@@ -1,81 +1,105 @@
-import React, { useRef, useState } from 'react';
-import ProductCard from '../CartContext/ProductCard'; // Certifique-se de que o caminho está correto
-import './product.css';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from 'react';
+import Product from '../CartContext/ProductCard';
+import productListStyles from './ProductList.module.css';
+import carouselStyles from './Carousel.module.css';
+import { Product as ProductType } from '../Store/CartStore';
 
-interface Product {
-  image: string;
-  title: string;
-  description: string;
-  price: number;
-}
-
-const products: Product[] = [
-  {
-    image: 'https://via.placeholder.com/150',
-    title: 'Produto 1',
-    description: 'Descrição do Produto 1',
-    price: 10.99,
-  },
-  {
-    image: 'https://via.placeholder.com/150',
-    title: 'Produto 2',
-    description: 'Descrição do Produto 2',
-    price: 19.99,
-  },
-  {
-    image: 'https://via.placeholder.com/150',
-    title: 'Produto 3',
-    description: 'Descrição do Produto 3',
-    price: 29.99,
-  },
-  {
-    image: 'https://via.placeholder.com/150',
-    title: 'Produto 4',
-    description: 'Descrição do Produto 4',
-    price: 39.99,
-  },
-  {
-    image: 'https://via.placeholder.com/150',
-    title: 'Produto 5',
-    description: 'Descrição do Produto 5',
-    price: 49.99,
-  },
-  // Adicione mais produtos aqui...
-];
-
-export const ProductList: React.FC = () => {
+const ProductList: React.FC = () => {
+  const [scrollX, setScrollX] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const [maxScroll, setMaxScroll] = useState(0);
 
-  const handleScroll = (direction: 'left' | 'right') => {
+  // Lista de produtos (ajuste conforme necessário)
+  const products: ProductType[] = [
+    {
+      id: 1,
+      name: "Product 1",
+      price: 29.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 1",
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      price: 39.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 2",
+    },
+    {
+      id: 3,
+      name: "Product 3",
+      price: 19.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 3",
+    },
+    {
+      id: 4,
+      name: "Product 4",
+      price: 49.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 4",
+    },
+    {
+      id: 5,
+      name: "Product 5",
+      price: 59.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 5",
+    },
+    {
+      id: 6,
+      name: "Product 6",
+      price: 69.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 6",
+    },
+    {
+      id: 7,
+      name: "Product 7",
+      price: 69.99,
+      image: "https://via.placeholder.com/150",
+      description: "Descrição do Produto 7",
+    },
+    // Adicione mais produtos conforme necessário
+  ];
+
+  const itemWidth = 220; // Largura do item + margin
+
+  useEffect(() => {
     if (carouselRef.current) {
-      const scrollAmount = 300;
-      const newPosition = direction === 'left'
-        ? Math.max(0, scrollPosition - scrollAmount)
-        : Math.min(carouselRef.current.scrollWidth - carouselRef.current.clientWidth, scrollPosition + scrollAmount);
-
-      setScrollPosition(newPosition);
-      carouselRef.current.scrollTo({
-        left: newPosition,
-        behavior: 'smooth',
-      });
+      const totalWidth = carouselRef.current.scrollWidth;
+      const visibleWidth = carouselRef.current.clientWidth;
+      setMaxScroll(Math.max(totalWidth - visibleWidth, 0));
     }
+  }, [products]);
+
+  const scrollLeft = () => {
+    setScrollX((prev) => Math.min(prev + itemWidth, 0));
+  };
+
+  const scrollRight = () => {
+    setScrollX((prev) => Math.max(prev - itemWidth, -maxScroll));
   };
 
   return (
-    <div className="carousel-container">
-      <button className="nav-button left" onClick={() => handleScroll('left')}>
-        <FaChevronLeft />
+    <div className={productListStyles.productListContainer}>
+      <button className={`${carouselStyles.carouselButton} ${carouselStyles.carouselButtonLeft}`} onClick={scrollLeft}>
+        &lt;
       </button>
-      <div className="product-container" ref={carouselRef}>
-        {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
+      <div className={carouselStyles.carouselWrapper} style={{ transform: `translateX(${scrollX}px)` }} ref={carouselRef}>
+        <div className={productListStyles.productList}>
+          {products.map((product) => (
+            <div className={productListStyles.carouselItem} key={product.id}>
+              <Product product={product} />
+            </div>
+          ))}
+        </div>
       </div>
-      <button className="nav-button right" onClick={() => handleScroll('right')}>
-        <FaChevronRight />
+      <button className={`${carouselStyles.carouselButton} ${carouselStyles.carouselButtonRight}`} onClick={scrollRight}>
+        &gt;
       </button>
     </div>
   );
 };
+
+export default ProductList;

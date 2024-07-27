@@ -9,9 +9,20 @@
 }
 
 .carrosel-prod {
-    width: 100%;
+    width: 70%;
+    margin: 10px auto;
+    overflow-x: visible;
 }
 
 .title {
     text-align: center;
+    margin-top: 40px;
 }
+
+@media (max-width: 768px) {
+    
+    .carrosel-prod {
+      width: 100%;
+      padding: 10px 10px; /* Menos padding para telas pequenas */
+    }
+  }

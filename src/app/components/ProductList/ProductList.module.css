@@ -1,0 +1,37 @@
+.productListContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Oculta itens fora da área visível */
+  padding: 20px 0; /* Espaçamento superior e inferior para o carrossel */
+}
+
+.productList {
+  display: flex;
+  align-items: center; /* Centraliza os itens verticalmente */
+  flex-wrap: nowrap; /* Garante que os itens não quebrem a linha */
+  width: max-content; /* Ajusta a largura do contêiner conforme o conteúdo */
+  gap: 20px; /* Espaçamento entre os itens */
+}
+
+.carouselItem {
+  flex: 0 0 auto; /* Faz com que os itens não encolham nem se estiquem */
+  width: 200px; /* Largura dos itens padrão */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura total */
+}
+
+/* Ajuste da largura dos itens para diferentes tamanhos de tela */
+@media (max-width: 1200px) {
+  .carouselItem {
+    width: 150px; /* Largura menor para telas médias */
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselItem {
+    width: 150px; /* Largura ainda menor para telas pequenas */
+  }
+  .productListContainer {
+    width: 100%;
+    padding: 10px 0; /* Menos padding para telas pequenas */
+  }
+}

@@ -1,6 +1,5 @@
 import { Carousel } from "../../components/Carousel/CarouselProps"
-import { ProductList } from "../../components/ProductList/ProductList"
-import { CartProvider } from "../../components/CartContext/CartContext"
+import ProductList from "../../components/ProductList/ProductList"
 import { AboutUs } from "../../components/AboutUs/AboutUs"
 
 import './home.css'
@@ -19,11 +18,9 @@ export const Home = () => {
             <Carousel images={images} />
             <div className="carrosel-prod">
                 <h1 className="title">Nossos Chás</h1>
-                <CartProvider>
-                    <ProductList />
-                </CartProvider>
+                <ProductList/>                
             </div>
-            <AboutUs/>
+            <AboutUs />
         </div>
     )
 }
