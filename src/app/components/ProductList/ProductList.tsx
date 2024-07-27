@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import Product from '../CartContext/ProductCard';
 import productListStyles from './ProductList.module.css';
 import carouselStyles from './Carousel.module.css';
-import { Product as ProductType } from '../Store/CartStore';
+
+// Definindo o tipo Product diretamente aqui
+interface ProductType {
+  id: number;
+  name: string;
+  price: number;
+  image: string;
+  description: string;
+}
 
 const ProductList: React.FC = () => {
   const [scrollX, setScrollX] = useState(0);

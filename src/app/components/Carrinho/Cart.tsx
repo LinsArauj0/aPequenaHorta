@@ -1,19 +1,24 @@
 import React from 'react';
-import { useCartStore } from '../Store/CartStore';
+import { useCartStore, CartItem as CartItemType } from '../Store/CartStore';
 import CartItem from './CartItem'; // Certifique-se de usar a exportação padrão
 
 const Cart: React.FC = () => {
-  const { cart, clearCart, totalAmount, setQuantity } = useCartStore(state => ({
+  const { cart, clearCart, totalAmount, setQuantity, removeFromCart } = useCartStore(state => ({
     cart: state.cart,
     clearCart: state.clearCart,
     totalAmount: state.totalAmount,
-    setQuantity: state.setQuantity
+    setQuantity: state.setQuantity,
+    removeFromCart: state.removeFromCart
   }));
 
   const handleQuantityChange = (id: number, quantity: number) => {
     if (quantity > 0) {
       setQuantity(id, quantity);
     }
+  };
+
+  const handleRemove = (id: number) => {
+    removeFromCart(id);
   };
 
   return (
@@ -30,9 +35,9 @@ const Cart: React.FC = () => {
             <CartItem
               key={item.id}
               item={item}
-              onQuantityChange={(quantity) => handleQuantityChange(item.id, quantity)} onRemove={function (_id: number): void {
-                throw new Error('Function not implemented.');
-              } }            />
+              onQuantityChange={(quantity) => handleQuantityChange(item.id, quantity)}
+              onRemove={() => handleRemove(item.id)} // Corrigido para chamar a função `handleRemove`
+            />
           ))
         )}
       </div>
