@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 export type CartItem = {
   id: number;
@@ -18,9 +18,9 @@ type CartStore = {
   totalAmount: number;
   discount: number;
   shipping: number;
-  paymentMethod: string; // Adicionando a forma de pagamento
   applyDiscount: (code: string) => void;
-  setPaymentMethod: (method: string) => void; // Método para definir a forma de pagamento
+  paymentMethod: string;
+  setPaymentMethod: (method: string) => void;
 };
 
 const calculateTotalAmount = (cart: CartItem[], discount: number, shipping: number) => {
@@ -33,7 +33,7 @@ export const useCartStore = create<CartStore>((set) => ({
   totalAmount: 0,
   discount: 0,
   shipping: 0,
-  paymentMethod: 'Não definido', // Valor padrão
+  paymentMethod: 'Não definido',
   addToCart: (product) =>
     set((state) => {
       const existingProduct = state.cart.find((item) => item.id === product.id);
@@ -56,7 +56,7 @@ export const useCartStore = create<CartStore>((set) => ({
         totalAmount: calculateTotalAmount(updatedCart, state.discount, state.shipping),
       };
     }),
-  clearCart: () => set(() => ({ cart: [], totalAmount: 0, discount: 0, shipping: 0, paymentMethod: 'Não definido' })),
+  clearCart: () => set(() => ({ cart: [], totalAmount: 0, discount: 0, shipping: 0 })),
   setQuantity: (id, quantity) =>
     set((state) => {
       const updatedCart = state.cart.map((item) =>
@@ -76,5 +76,5 @@ export const useCartStore = create<CartStore>((set) => ({
       totalAmount: calculateTotalAmount(state.cart, discount, state.shipping),
     }));
   },
-  setPaymentMethod: (method) => set(() => ({ paymentMethod: method })),
+  setPaymentMethod: (method) => set({ paymentMethod: method }),
 }));
