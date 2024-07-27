@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCartStore, CartItem as CartItemType } from '../Store/CartStore';
+import { useCartStore } from '../Store/CartStore';
 import CartItem from './CartItem'; // Certifique-se de usar a exportação padrão
 
 const Cart: React.FC = () => {
