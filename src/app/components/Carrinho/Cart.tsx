@@ -30,8 +30,9 @@ const Cart: React.FC = () => {
             <CartItem
               key={item.id}
               item={item}
-              onQuantityChange={(quantity) => handleQuantityChange(item.id, quantity)}
-            />
+              onQuantityChange={(quantity) => handleQuantityChange(item.id, quantity)} onRemove={function (_id: number): void {
+                throw new Error('Function not implemented.');
+              } }            />
           ))
         )}
       </div>
